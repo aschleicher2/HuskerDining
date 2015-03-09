@@ -36,6 +36,7 @@ public class MenuScraper {
 			e.printStackTrace();
 		}
 		
+		DatabaseConnector.uploadMenuData(halls);
 	}
 
 	private void testMenu() {
