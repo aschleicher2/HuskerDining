@@ -11,7 +11,15 @@ public class DiningHall {
 		menus = new ArrayList<Menu>();
 	}
 	
+	public String getName() {
+		return name;
+	}
+	
 	public void addMenu(Menu menu) {
 		menus.add(menu);
+	}
+	
+	public ArrayList<Menu> getMenus() {
+		return menus;
 	}
 }

@@ -23,4 +23,24 @@ public class Menu {
 	public void addMenuItem(MenuItem menuItem) {
 		menuItems.add(menuItem);
 	}
+	
+	public ArrayList<MenuItem> getMenuItems() {
+		return menuItems;
+	}
+	
+	public Date getDate() {
+		return date;
+	}
+	
+	public String getFromTime() {
+		return fromTime;
+	}
+	
+	public String getToTime() {
+		return toTime;
+	}
+	
+	public String getMeal() {
+		return meal;
+	}
 }
