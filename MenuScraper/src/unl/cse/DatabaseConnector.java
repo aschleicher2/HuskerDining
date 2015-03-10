@@ -71,26 +71,39 @@ public class DatabaseConnector {
 						rs = statement.getGeneratedKeys();
 						if(rs.next()){
 							menuID = rs.getInt(1);
-							System.out.println("Create menu in db with id: " + menuID);
+							System.out.println("Created menu in db with id: " + menuID);
 						} else {
 							System.out.println("Failed to generate id for menu");
 							return false;
 						}
 						for (MenuItem menuItem : menu.getMenuItems()) {
 							int menuItemID;
-							statement = conn.prepareStatement("INSERT INTO MenuItem (name, category, menu_id) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+							statement = conn.prepareStatement("SELECT id FROM MenuItem WHERE name = ?");
 							statement.setString(1, menuItem.getName());
-							statement.setString(2, menuItem.getCategory());
-							statement.setInt(3, menuID);
-							statement.executeUpdate();
-							rs = statement.getGeneratedKeys();
-							if(rs.next()){
-								menuItemID = rs.getInt(1);
-								System.out.println("Create menu item in db with id: " + menuItemID);
+							rs = statement.executeQuery();
+							if(!rs.next()){
+								statement = conn.prepareStatement("INSERT INTO MenuItem (name, category, menu_id) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+								statement.setString(1, menuItem.getName());
+								statement.setString(2, menuItem.getCategory());
+								statement.setInt(3, menuID);
+								statement.executeUpdate();
+								rs = statement.getGeneratedKeys();
+								if(rs.next()){
+									menuItemID = rs.getInt(1);
+									System.out.println("Created menu item in db with id: " + menuItemID);
+								} else {
+									System.out.println("Failed to generate id for menu item");
+									return false;
+								}
 							} else {
-								System.out.println("Failed to generate id for menu item");
-								return false;
+								menuItemID = rs.getInt(1);
 							}
+							
+							statement = conn.prepareStatement("INSERT INTO ItemOnMenu (menu_id,item_id) VALUES (?,?)");
+							statement.setInt(1, menuID);
+							statement.setInt(2, menuItemID);
+							statement.executeUpdate();
+							
 						}
 					} else {
 						System.out.println("Meal already exists");
