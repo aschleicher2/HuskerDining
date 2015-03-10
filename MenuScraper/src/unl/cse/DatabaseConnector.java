@@ -32,17 +32,69 @@ public class DatabaseConnector {
 		
 		
 		// Initialize a statement that we will be using to insert and view data
-		PreparedStatement statement = null;
+		PreparedStatement statement = null;	
+		
 		
 		try {
+			// Add the tables if they don't exist
+			System.out.println("Adding tables into database if they don't exist");
+			
+			// Hall table
+			statement = conn.prepareStatement("CREATE TABLE IF NOT EXISTS Hall ("
+					+ "id INT NOT NULL AUTO_INCREMENT,"
+					+ "name VARCHAR(45) NOT NULL,"
+					+ "address VARCHAR(45),"
+					+ "phone VARCHAR(45),"
+					+ "manager VARCHAR(45),"
+					+ "PRIMARY KEY (id))");
+			statement.executeUpdate();
+			
+			// Menu table
+			statement = conn.prepareStatement("CREATE TABLE IF NOT EXISTS Menu ("
+					+ "id INT NOT NULL AUTO_INCREMENT,"
+					+ "meal VARCHAR(45) NOT NULL,"
+					+ "date LONG NOT NULL,"
+					+ "fromTime VARCHAR(45),"
+					+ "toTime VARCHAR(45),"
+					+ "hall_id INT NOT NULL,"
+					+ "FOREIGN KEY (hall_id)"
+					+ "REFERENCES Hall(id),"
+					+ "PRIMARY KEY (id))");
+			statement.executeUpdate();
+			
+			// MenuItem table
+			statement = conn.prepareStatement("CREATE TABLE IF NOT EXISTS MenuItem ("
+					+ "id INT NOT NULL AUTO_INCREMENT,"
+					+ "name VARCHAR(45) NOT NULL,"
+					+ "category VARCHAR(45),"
+					+ "PRIMARY KEY (id))");
+			statement.executeUpdate();
+			
+			// ItemOnMenu table
+			statement = conn.prepareStatement("CREATE TABLE IF NOT EXISTS ItemOnMenu ("
+					+ "menu_id INT NOT NULL,"
+					+ "item_id INT NOT NULL,"
+					+ "FOREIGN KEY (menu_id)"
+					+ "REFERENCES Menu(id),"
+					+ "FOREIGN KEY (item_id)"
+					+ "REFERENCES MenuItem(id))");
+			statement.executeUpdate();
+			
+			System.out.println("Tables ready");
+			
+			// Initialize ResultSet for use in the for loops
+			ResultSet rs;
+			
 			// Loop through each DiningHall that is available
+			
 			for (DiningHall diningHall : halls) {
-				int hallID;
 				
+				
+				int hallID;
 				// Check to see if the DiningHall already exists in the database
 				statement = conn.prepareStatement("SELECT id FROM Hall WHERE name = ?");
 				statement.setString(1, diningHall.getName());
-				ResultSet rs = statement.executeQuery();
+				rs = statement.executeQuery();
 				
 				// If it does exist, get the id
 				// If it doesn't exist, insert the hall and get the id
@@ -60,8 +112,14 @@ public class DatabaseConnector {
 					}
 				}
 				
+				double count = 0;
 				// Loop through each Menu that is in the current DiningHall
 				for (Menu menu : diningHall.getMenus()) {
+					double percentDone = (count/diningHall.getMenus().size())*100;
+					
+					// Print the percentage done for user of program
+					System.out.printf("Inserting data for %s: %.2f%%\n",diningHall.getName(),percentDone);
+					
 					// Check to see if this menu already exists in the database
 					statement = conn.prepareStatement("SELECT id FROM Menu WHERE hall_id = ? AND meal = ? AND date = ?");
 					statement.setInt(1, hallID);
@@ -83,7 +141,6 @@ public class DatabaseConnector {
 						rs = statement.getGeneratedKeys();
 						if(rs.next()){
 							menuID = rs.getInt(1);
-							System.out.println("Created menu in db with id: " + menuID);
 						} else {
 							System.out.println("Failed to generate id for menu");
 							return false;
@@ -107,7 +164,6 @@ public class DatabaseConnector {
 								rs = statement.getGeneratedKeys();
 								if(rs.next()){
 									menuItemID = rs.getInt(1);
-									System.out.println("Created menu item in db with id: " + menuItemID);
 								} else {
 									System.out.println("Failed to generate id for menu item");
 									return false;
@@ -125,18 +181,23 @@ public class DatabaseConnector {
 						}
 					}
 					
+					count++;					
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
+		System.out.println("Finished inserting data into the database");
+		
 		// Close the connection to the database
 		try {
 			conn.close();
+			System.out.println("Connection closed successfully");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		
 		return true;
 	}

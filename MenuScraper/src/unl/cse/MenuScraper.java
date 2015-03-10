@@ -32,6 +32,8 @@ public class MenuScraper {
 			// Establish a connection to the database
 			connectToMenu();
 			
+			System.out.println("Successfully connected to menu");
+			
 			// Initialize the array that will store all of our data
 			halls = new ArrayList<DiningHall>();
 			
@@ -41,8 +43,7 @@ public class MenuScraper {
 			// Upload the data to the database
 			DatabaseConnector.uploadMenuData(halls);
 			
-			System.out.println("Menu successfully scraped and loaded the menus for " + halls.size() + " halls for the next 14 days");
-			
+			System.out.println("Done!");
 			// Print the menu for debugging
 //			printMenu();
 		} catch (Exception e) {
@@ -109,6 +110,10 @@ public class MenuScraper {
 				c.add(Calendar.DATE, 1);
 				currentDate = c.getTime();
 			}
+			
+			// Print the percentage done for user of program
+			double percentDone = ((double)i/14)*100;
+			System.out.printf("Scraping menus: %.2f%% => %s\n",percentDone,currentDate);
 			
 			// Set the date to the next day
 			datePicker.setValueAttribute(dateFormat.format(currentDate));
@@ -191,6 +196,8 @@ public class MenuScraper {
 				hall.addMenu(menu);
 			}
 		}
+		
+		System.out.println("Finished scraping menus");
 
 		
 		// Finally, add the hall to the list of dining halls
