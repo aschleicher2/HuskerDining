@@ -43,4 +43,8 @@ public class Menu {
 	public String getMeal() {
 		return meal;
 	}
+
+	public boolean isEmpty() {
+		return menuItems.isEmpty();
+	}
 }

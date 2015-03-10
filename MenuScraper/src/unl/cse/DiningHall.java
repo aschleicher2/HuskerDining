@@ -16,7 +16,10 @@ public class DiningHall {
 	}
 	
 	public void addMenu(Menu menu) {
-		menus.add(menu);
+		if(!menu.isEmpty()){
+			menus.add(menu);
+		}
+		
 	}
 	
 	public ArrayList<Menu> getMenus() {
