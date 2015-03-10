@@ -82,10 +82,9 @@ public class DatabaseConnector {
 							statement.setString(1, menuItem.getName());
 							rs = statement.executeQuery();
 							if(!rs.next()){
-								statement = conn.prepareStatement("INSERT INTO MenuItem (name, category, menu_id) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+								statement = conn.prepareStatement("INSERT INTO MenuItem (name, category) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
 								statement.setString(1, menuItem.getName());
 								statement.setString(2, menuItem.getCategory());
-								statement.setInt(3, menuID);
 								statement.executeUpdate();
 								rs = statement.getGeneratedKeys();
 								if(rs.next()){
