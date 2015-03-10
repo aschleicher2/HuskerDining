@@ -29,21 +29,30 @@ public class MenuScraper {
 	
 	public MenuScraper() {
 		try {
+			// Establish a connection to the database
 			connectToMenu();
 			
+			// Initialize the array that will store all of our data
 			halls = new ArrayList<DiningHall>();
 			
+			// Begin scraping process, which will insert the data found into the halls array
 			loadMenu();
-			System.out.println("Menu successfully scraped and loaded");
-			testMenu();
+			
+			// Upload the data to the database
+			DatabaseConnector.uploadMenuData(halls);
+			
+			System.out.println("Menu successfully scraped and loaded the menus for " + halls.size() + " halls for the next 14 days");
+			
+			// Print the menu for debugging
+//			printMenu();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		DatabaseConnector.uploadMenuData(halls);
+		
 	}
 
-	private void testMenu() {
+	private void printMenu() {
 		for (DiningHall hall : halls) {
 			System.out.println(hall.getName());
 			for (Menu menu : hall.getMenus()) {
@@ -123,6 +132,7 @@ public class MenuScraper {
 					switch (menuElement.getTagName()) {
 						case "span":
 							// Menu Item
+							// Make sure the span is actually a MenuItem
 							if(menuElement.getAttribute("class").equals("MenuItem")){
 								MenuItem menuItem = new MenuItem(menuElement.asText(), category);
 								menu.addMenuItem(menuItem);
@@ -157,6 +167,7 @@ public class MenuScraper {
 							String fromTime = null;
 							String toTime = null;
 							try{
+								// Split the hours so that we can get a fromTime and a toTime
 								String[] hours = infoSplit[1].replace(" ", "").replace("(", "").replace(")", "").split("-");
 								fromTime = hours[0];
 								toTime = hours[1];
@@ -165,11 +176,11 @@ public class MenuScraper {
 							}
 							
 							
-							// Initialize the menu with the data
+							// Initialize the menu with the data found
 							menu = new Menu(currentDate, meal, fromTime, toTime);
 							break;
 						default:
-							// Unknown, skip
+							// Unknown element, skip
 							break;
 					}
 				}
