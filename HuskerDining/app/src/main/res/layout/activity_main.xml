@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:id="@+id/">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menu"
+        android:id="@+id/button_menu"
+        android:layout_centerVertical="true"
+        android:clickable="false"
+        android:textSize="@dimen/abc_action_button_min_width_overflow_material"
+        android:layout_alignLeft="@+id/button_info"
+        android:layout_alignStart="@+id/button_info"
+        android:layout_alignRight="@+id/button_info"
+        android:layout_alignEnd="@+id/button_info" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="HUSKER DINING"
+        android:id="@+id/husker_dining"
+        android:layout_marginTop="38dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="@android:dimen/app_icon_size"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textIsSelectable="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dining Hall Info"
+        android:id="@+id/button_info"
+        android:textSize="@dimen/abc_action_button_min_width_overflow_material"
+        android:layout_marginBottom="81dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

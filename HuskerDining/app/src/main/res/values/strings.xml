@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">HuskerDining</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_selection">SelectionActivity</string>
+    <string name="title_activity_info">InfoActivity</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="title_activity_ratings">RatingsActivity</string>
+</resources>
