@@ -44,6 +44,7 @@ public class MenuScraper {
 			DatabaseConnector.uploadMenuData(halls);
 			
 			System.out.println("Done!");
+			
 			// Print the menu for debugging
 //			printMenu();
 		} catch (Exception e) {
@@ -118,10 +119,18 @@ public class MenuScraper {
 			// Set the date to the next day
 			datePicker.setValueAttribute(dateFormat.format(currentDate));
 			
-			// Simulate pressing the GO button
-			button.click();
-			ScriptResult result = page.executeJavaScript("cphpageTitle_btnSubmit.onclick()");
-			HtmlPage menuPage = (HtmlPage) result.getNewPage();
+			// Simulate pressing the GO button, keep trying if it fails
+			HtmlPage menuPage = null;
+			while (menuPage == null) {
+				try {
+					button.click();
+					ScriptResult result = page.executeJavaScript("cphpageTitle_btnSubmit.onclick()");
+					menuPage = (HtmlPage) result.getNewPage();
+				} catch (Exception e) {
+					System.out.println("Unable to load, trying again...");
+				}
+			}
+			
 			
 			
 			// Select the grid that contains all of the menus
