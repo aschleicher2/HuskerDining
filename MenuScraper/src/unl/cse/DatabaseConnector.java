@@ -1,11 +1,18 @@
 package unl.cse;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.sql.Connection;
+
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 import com.mysql.jdbc.Statement;
 
@@ -22,8 +29,37 @@ public class DatabaseConnector {
 		
 		// Establish a connection to the database
 		Connection conn = null;
+		
+		// Load DB connection info from config file
+		Properties prop = new Properties();
+		InputStream input = null;
+		
+		String dbURL = null;
+		String dbUser = null;
+		String dbPass = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mysql://cse.unl.edu:3306/askinner", "askinner", "x");
+			input = new FileInputStream("config.properties");
+			prop.load(input);
+			dbURL = prop.getProperty("dbURL");
+			dbUser = prop.getProperty("dbUser");
+			dbPass = prop.getProperty("dbPass");
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(input != null) {
+				try {
+					input.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+		encryptor.setPassword("Huskers");
+		dbPass = encryptor.decrypt(dbPass);
+		try {
+			conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
 			System.out.println("Connected to database successfully");
 		} catch (SQLException e) {
 			e.printStackTrace();
