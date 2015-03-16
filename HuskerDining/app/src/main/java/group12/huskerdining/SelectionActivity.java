@@ -1,13 +1,26 @@
 package group12.huskerdining;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.Statement;
+
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-
 
 public class SelectionActivity extends ActionBarActivity {
 
@@ -47,5 +60,35 @@ public class SelectionActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void buttonOnClick(View v){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+   //4 Spinner date_dropdown = (Spinner)findViewById(R.id.meal_type);
+    String[] items = new String[]{"Breakfast", "Lunch", "Dinner"};
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+    //date_dropdown.setAdapter(adapter);
+    //date_dropdown.setOnItemSelectedListener(this);
+
+    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+
+        switch (position) {
+            case 0:
+                // Breakfast
+                break;
+            case 1:
+                //Lunch
+                break;
+            case 2:
+                //Dinner
+                break;
+            default:
+                //nothing
+                break;
+
+        }
     }
 }
