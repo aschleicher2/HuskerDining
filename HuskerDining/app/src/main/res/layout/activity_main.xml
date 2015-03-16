@@ -14,10 +14,11 @@
         android:layout_centerVertical="true"
         android:clickable="false"
         android:textSize="@dimen/abc_action_button_min_width_overflow_material"
-        android:layout_alignLeft="@+id/button_info"
-        android:layout_alignStart="@+id/button_info"
-        android:layout_alignRight="@+id/button_info"
-        android:layout_alignEnd="@+id/button_info" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/husker_dining"
+        android:layout_alignEnd="@+id/husker_dining"
+        android:gravity="center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -25,13 +26,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="HUSKER DINING"
         android:id="@+id/husker_dining"
-        android:layout_marginTop="38dp"
         android:textColor="@android:color/holo_red_dark"
         android:textSize="@android:dimen/app_icon_size"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        android:gravity="center_horizontal"
+        android:layout_alignParentTop="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -41,6 +42,10 @@
         android:textSize="@dimen/abc_action_button_min_width_overflow_material"
         android:layout_marginBottom="81dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignRight="@+id/button_menu"
+        android:layout_alignEnd="@+id/button_menu"
+        android:layout_alignLeft="@+id/husker_dining"
+        android:layout_alignStart="@+id/husker_dining"
+        android:gravity="center_horizontal" />
 
 </RelativeLayout>

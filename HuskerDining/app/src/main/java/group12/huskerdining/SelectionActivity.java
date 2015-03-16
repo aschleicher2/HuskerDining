@@ -1,9 +1,12 @@
 package group12.huskerdining;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class SelectionActivity extends ActionBarActivity {
@@ -12,6 +15,15 @@ public class SelectionActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
+
+        Button selectionButton = (Button)findViewById(R.id.button_getMenu);
+        selectionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), MenuActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
