@@ -1,27 +1,13 @@
 package group12.huskerdining;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Properties;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 
 public class InfoActivity extends ActionBarActivity {
@@ -38,8 +24,20 @@ public class InfoActivity extends ActionBarActivity {
             e.printStackTrace();
         }
 
+
         try {
-            Log.v("Return name", (String)returnSet.get(0));
+            //Log.v("Return address", (String)returnSet.get(1));
+            TextView name = (TextView)findViewById(R.id.name_info);
+            name.setText((String)returnSet.get(0));
+            TextView address = (TextView)findViewById(R.id.address_info);
+            address.setText((String)returnSet.get(1));
+            TextView hours = (TextView)findViewById(R.id.phone_info);
+            hours.setText((String)returnSet.get(2));
+            TextView manager = (TextView)findViewById(R.id.manager_info);
+            manager.setText((String) returnSet.get(3));
+
+
+
         } catch (Exception e) {
 
         }

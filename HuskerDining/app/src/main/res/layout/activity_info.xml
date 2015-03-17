@@ -12,25 +12,27 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Address"
         android:id="@+id/address"
-        android:layout_below="@+id/spinner_diningHall"
         android:layout_marginTop="38dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:singleLine="false"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/diningHall_info"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Business Hours"
-        android:id="@+id/business_hours"
+        android:text="Phone Number"
+        android:id="@+id/phone_number"
         android:layout_below="@+id/address"
         android:layout_marginTop="53dp"
-        android:layout_alignRight="@+id/businessHours_info"
-        android:layout_alignEnd="@+id/businessHours_info"
+        android:layout_alignRight="@+id/phone_info"
+        android:layout_alignEnd="@+id/phone_info"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:gravity="center_horizontal" />
@@ -41,7 +43,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Manager&apos;s name"
         android:id="@+id/manager_name"
-        android:layout_below="@+id/business_hours"
+        android:layout_below="@+id/phone_number"
         android:layout_marginTop="72dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -63,17 +65,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Spinner
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/spinner_diningHall"
-        android:spinnerMode="dropdown"
-        android:layout_below="@+id/diningHall_info"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -85,20 +76,22 @@
         android:layout_alignParentStart="true"
         android:gravity="center_horizontal"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:paddingBottom="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/businessHours_info"
-        android:layout_below="@+id/business_hours"
+        android:id="@+id/phone_info"
+        android:layout_below="@+id/phone_number"
         android:layout_alignRight="@+id/address_info"
         android:layout_alignEnd="@+id/address_info"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -108,9 +101,27 @@
         android:id="@+id/manager_info"
         android:gravity="center_horizontal"
         android:layout_below="@+id/manager_name"
-        android:layout_alignRight="@+id/businessHours_info"
-        android:layout_alignEnd="@+id/businessHours_info"
+        android:layout_alignRight="@+id/phone_info"
+        android:layout_alignEnd="@+id/phone_info"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Name"
+        android:id="@+id/name_info"
+        android:layout_below="@+id/diningHall_info"
+        android:layout_alignRight="@+id/address"
+        android:layout_alignEnd="@+id/address"
+        android:layout_above="@+id/address_info"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:gravity="center_horizontal"
+        android:textColor="#ffb60500"
+        android:textSize="40dp"
+        android:paddingTop="10dp" />
 
 </RelativeLayout>
