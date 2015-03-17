@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Scanner;
 import java.sql.Connection;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
@@ -137,8 +138,19 @@ public class DatabaseConnector {
 				if(rs.next()){
 					hallID = rs.getInt("id");
 				} else {
-					statement = conn.prepareStatement("INSERT INTO Hall (name) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+					statement = conn.prepareStatement("INSERT INTO Hall (name, address, phone, manager) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 					statement.setString(1, diningHall.getName());
+					
+					Scanner s = new Scanner(System.in);
+					System.out.println("Enter address of " + diningHall.getName());
+					statement.setString(2, s.nextLine());
+					
+					System.out.println("Enter phone number of " + diningHall.getName());
+					statement.setString(3, s.nextLine());
+					
+					System.out.println("Enter manager of " + diningHall.getName());
+					statement.setString(4, s.nextLine());
+					
 					statement.executeUpdate();
 					rs = statement.getGeneratedKeys();
 					if(rs.next()){

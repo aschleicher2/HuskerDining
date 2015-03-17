@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import android.support.v7.app.ActionBarActivity;
@@ -30,15 +31,17 @@ public class InfoActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
         ConnectDB connect = new ConnectDB();
-        ResultSet returnSet = connect.connectDB("select name, address, hours, manager from hall where id=1");
-        if(returnSet==null){
-            Log.v("return set", "it is null!");
-        } else {
-            try {
-                Log.v("Return name", returnSet.getString(1));
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        ArrayList<Object> returnSet = null;
+        try{
+            returnSet = connect.execute("select", "select name, address, phone, manager from Hall where id=1").get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Log.v("Return name", (String)returnSet.get(0));
+        } catch (Exception e) {
+
         }
     }
 
