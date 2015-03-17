@@ -5,7 +5,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="group12.huskerdining.SelectionActivity"
-    android:id="@+id/">
+    android:id="@+id/selection_screen">
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,11 +26,10 @@
         android:layout_height="wrap_content"
         android:text="Get Menu"
         android:id="@+id/button_getMenu"
-        android:layout_marginBottom="52dp"
         android:textSize="@dimen/abc_action_bar_progress_bar_size"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/spinner_meal"
-        android:layout_alignEnd="@+id/spinner_meal"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -53,12 +52,10 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Date"
         android:id="@+id/text_date"
-        android:layout_below="@+id/select_menu"
         android:gravity="center_horizontal"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/select_menu"
+        android:layout_alignLeft="@+id/text_meal"
+        android:layout_alignStart="@+id/text_meal" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -66,17 +63,14 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Meal"
         android:id="@+id/text_meal"
-        android:layout_below="@+id/spinner_dinningHall"
         android:gravity="center_horizontal"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/spinner_diningHall"
+        android:layout_centerHorizontal="true" />
 
     <Spinner
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner_dinningHall"
+        android:id="@+id/spinner_diningHall"
         android:spinnerMode="dropdown"
         android:layout_below="@+id/text_diningHall"
         android:layout_alignParentLeft="true"
@@ -88,12 +82,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/spinner_meal"
-        android:layout_below="@+id/text_meal"
         android:spinnerMode="dropdown"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_above="@+id/button_getMenu"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true" />
 
     <DatePicker
         android:layout_width="wrap_content"

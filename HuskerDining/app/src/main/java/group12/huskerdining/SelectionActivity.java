@@ -37,6 +37,19 @@ public class SelectionActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+        Spinner meal_type_dropdown = (Spinner)findViewById(R.id.spinner_meal);
+        String[] items = new String[]{"Breakfast", "Lunch", "Dinner"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        meal_type_dropdown.setAdapter(adapter);
+        //date_dropdown.setOnItemSelectedListener(this);
+
+        Spinner dining_hall_dropdown = (Spinner)findViewById(R.id.spinner_diningHall);
+        String[] items2 = new String[]{"Selleck"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items2);
+        dining_hall_dropdown.setAdapter(adapter2);
+
+
     }
 
 
@@ -62,17 +75,6 @@ public class SelectionActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void buttonOnClick(View v){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
-   //4 Spinner date_dropdown = (Spinner)findViewById(R.id.meal_type);
-    String[] items = new String[]{"Breakfast", "Lunch", "Dinner"};
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
-    //date_dropdown.setAdapter(adapter);
-    //date_dropdown.setOnItemSelectedListener(this);
-
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
 
         switch (position) {
@@ -91,4 +93,7 @@ public class SelectionActivity extends ActionBarActivity {
 
         }
     }
+
+
+
 }
