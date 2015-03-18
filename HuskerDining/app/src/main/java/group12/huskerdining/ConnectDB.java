@@ -23,21 +23,18 @@ import javax.xml.transform.Result;
 /**
  * Created by shortysporty17 on 3/16/15.
  */
-public class ConnectDB extends AsyncTask<String, Void, ArrayList<Object>> {
+public class ConnectDB extends AsyncTask<String, Void, ArrayList<ArrayList<Object>>> {
 
     @Override
-    protected ArrayList<Object> doInBackground(String... params) {
-
-        switch (params[0]){
-            case ("select"):
-                return selectQuery(params[1]);
-            default:
-                return null;
+    protected ArrayList<ArrayList<Object>> doInBackground(String... params) {
+        if(params[0].startsWith("select")){
+            return selectQuery(params[0]);
         }
+        return null;
     }
 
-    public static ArrayList<Object> selectQuery(String query) {
-        ArrayList<Object> output = new ArrayList<Object>();
+    public static ArrayList<ArrayList<Object>> selectQuery(String query) {
+        ArrayList<ArrayList<Object>> rows = new ArrayList<ArrayList<Object>>();
         Connection conn = null;
         ResultSet rs = null;
 
@@ -53,11 +50,14 @@ public class ConnectDB extends AsyncTask<String, Void, ArrayList<Object>> {
             ResultSetMetaData rsmd = rs.getMetaData();
             int numColumns = rsmd.getColumnCount();
 
-
-            rs.next();
-            for (int i = 0; i < numColumns; i++) {
-                output.add(rs.getObject(i+1));
+            while(rs.next()){
+                ArrayList<Object> row = new ArrayList<Object>();
+                for (int i = 0; i < numColumns; i++) {
+                    row.add(rs.getObject(i+1));
+                }
+                rows.add(row);
             }
+
 
             conn.close();
 
@@ -71,6 +71,6 @@ public class ConnectDB extends AsyncTask<String, Void, ArrayList<Object>> {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        return output;
+        return rows;
     }
 }
