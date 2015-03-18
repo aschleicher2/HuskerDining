@@ -11,41 +11,45 @@
         android:layout_height="wrap_content"
         android:text="Menu"
         android:id="@+id/button_menu"
-        android:layout_centerVertical="true"
         android:clickable="false"
         android:textSize="@dimen/abc_action_button_min_width_overflow_material"
+        android:gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/husker_dining"
-        android:layout_alignEnd="@+id/husker_dining"
-        android:gravity="center_horizontal" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="HUSKER DINING"
+        android:text="Husker\nDining"
         android:id="@+id/husker_dining"
         android:textSize="@android:dimen/app_icon_size"
+        android:textIsSelectable="false"
+        android:gravity="center_vertical|center_horizontal"
+        android:textColor="#ffb60500"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/button_menu"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textIsSelectable="false"
-        android:gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:textColor="#ffb60500" />
+        android:textStyle="bold" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dining Hall Info"
+        android:text="Hall Info"
         android:id="@+id/button_info"
         android:textSize="@dimen/abc_action_button_min_width_overflow_material"
-        android:layout_marginBottom="81dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/button_menu"
-        android:layout_alignEnd="@+id/button_menu"
-        android:layout_alignLeft="@+id/husker_dining"
-        android:layout_alignStart="@+id/husker_dining"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/button_menu"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp" />
 
 </RelativeLayout>
