@@ -27,7 +27,7 @@ public class ConnectDB extends AsyncTask<String, Void, ArrayList<ArrayList<Objec
 
     @Override
     protected ArrayList<ArrayList<Object>> doInBackground(String... params) {
-        if(params[0].startsWith("select")){
+        if(params[0].toLowerCase().startsWith("select")){
             return selectQuery(params[0]);
         }
         return null;

@@ -1,10 +1,13 @@
 package group12.huskerdining;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Date;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -12,6 +15,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 
 public class MenuActivity extends ActionBarActivity {
@@ -20,6 +26,44 @@ public class MenuActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        int menuId = getIntent().getIntExtra("Menu Id",0);
+
+        ConnectDB connect = new ConnectDB();
+        try{
+            ArrayList<ArrayList<Object>> hallNameList = connect.execute("SELECT address FROM Hall WHERE id = 1").get();
+            TextView name = (TextView)findViewById(R.id.name_info);
+            name.setText((String)hallNameList.get(0).get(0));
+
+//            ArrayList<Object> menuInfo= connect.execute("Select meal, fromTime, toTime, date from Menu where id = " + menuId).get().get(0);
+//            TextView menuInfoText = (TextView)findViewById(R.id.meal_date);
+//            Date d = new Date(Long.getLong((String)menuInfo.get(3)));
+//            menuInfoText.setText(menuInfo.get(0) + " on " + d.getMonth() + "/" + d.getDay() + "/" + d.getYear() + " going from " +
+//                menuInfo.get(1) + " to " + menuInfo.get(2));
+
+            ArrayList<ArrayList<Object>> menuItems = connect.execute("SELECT name, category FROM ItemOnMenu "
+                    + "JOIN MenuItem on item_id = MenuItem.id "
+                    + "WHERE menu_id = " + menuId).get();
+
+            ArrayList<String> menuList = new ArrayList<String>();
+            System.out.println(menuItems.size());
+            String currentCategory = "";
+            for (ArrayList<Object> row : menuItems) {
+                if(!row.get(1).equals(currentCategory)){
+                    currentCategory = (String)row.get(1);
+                    menuList.add("---" + currentCategory + "---");
+                }
+                menuList.add((String)row.get(0));
+            }
+
+            ListView listview = (ListView)findViewById(R.id.food_list);
+            ArrayAdapter adapter = new ArrayAdapter(this,
+                    android.R.layout.simple_list_item_1, menuList);
+            listview.setAdapter(adapter);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
