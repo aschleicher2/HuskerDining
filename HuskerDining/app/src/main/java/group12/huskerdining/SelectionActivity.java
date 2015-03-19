@@ -1,28 +1,27 @@
 package group12.huskerdining;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.Statement;
-
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.Calendar;
+import java.util.Date;
+
 import android.view.View;
-import android.widget.ListView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.DatePicker;
 import android.widget.ArrayAdapter;
-import android.widget.AdapterView;
-import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+
 
 public class SelectionActivity extends ActionBarActivity {
+    String menu_type="";
+    String dining_hall="";
+    long meal_date=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +33,69 @@ public class SelectionActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), MenuActivity.class);
+                Spinner spinner_hall = (Spinner) findViewById(R.id.spinner_diningHall);
+                dining_hall = spinner_hall.getSelectedItem().toString();
+                Spinner spinner_type = (Spinner) findViewById(R.id.spinner_meal);
+                menu_type = spinner_type.getSelectedItem().toString();
+                DatePicker spinner_date = (DatePicker) findViewById(R.id.datePicker);
+                meal_date = spinner_date.getCalendarView().getDate();
+
+                Date date = new Date(meal_date);                      // timestamp now
+                Calendar cal = Calendar.getInstance();       // get calendar instance
+                cal.setTime(date);                           // set cal to date
+                cal.set(Calendar.HOUR, 0);                   // set hour to midnight
+                cal.set(Calendar.MINUTE, 0);                 // set minute in hour
+                cal.set(Calendar.SECOND, 0);                 // set second in minute
+                cal.set(Calendar.MILLISECOND, 0);            // set millis in second
+                Date meal_date_at_midnight = cal.getTime();
+
+                Log.v("Spinner ", dining_hall);
+                Log.v("Spinner ", menu_type);
+                Log.v("Spinner ", String.valueOf(meal_date_at_midnight.getTime()));
+               // Log.v("Spinner ", date);
+
+                ConnectDB connect = new ConnectDB();
+
+                StringBuilder hall_query = new StringBuilder("select id from Hall where name='");
+                hall_query.append(dining_hall);
+                hall_query.append("';");
+                ArrayList<Object> hall_return = null;
+
+                try {
+                    hall_return = connect.execute(hall_query.toString()).get().get(0);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+
+                ArrayList<Object> menu_id = null;
+                try {
+                    //hall_return = connect.execute("select", hall_query.toString()).get();
+                    StringBuilder menu_id_query = new StringBuilder("select id from Menu where hall_id=");
+                    menu_id_query.append(((Integer) hall_return.get(0)));
+                    menu_id_query.append(" and date=");
+                    menu_id_query.append(meal_date_at_midnight.getTime());
+                    menu_id_query.append(" and meal='");
+                    menu_id_query.append(menu_type);
+                    menu_id_query.append("'';");
+
+                    Log.v("Menu query", menu_id_query.toString());
+
+                    menu_id = connect.execute(menu_id_query.toString()).get().get(0);
+
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                Log.v("Menu id", menu_id.get(0).toString());
+                intent.putExtra("Menu id", ((Integer)menu_id.get(0)));
                 startActivity(intent);
             }
         });
 
-        Spinner meal_type_dropdown = (Spinner)findViewById(R.id.spinner_meal);
-        String[] items = new String[]{"Breakfast", "Lunch", "Dinner"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
-        meal_type_dropdown.setAdapter(adapter);
-        //date_dropdown.setOnItemSelectedListener(this);
-
-        Spinner dining_hall_dropdown = (Spinner)findViewById(R.id.spinner_diningHall);
-        String[] items2 = new String[]{"Selleck"};
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items2);
-        dining_hall_dropdown.setAdapter(adapter2);
-
+       addItemsOnTypeSpinner();
+       addItemsOnHallSpinner();
 
     }
 
@@ -75,7 +122,22 @@ public class SelectionActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
+    public void addItemsOnTypeSpinner(){
+        Spinner meal_type_dropdown = (Spinner)findViewById(R.id.spinner_meal);
+        String[] items = new String[]{"Breakfast", "Lunch", "Dinner"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        meal_type_dropdown.setAdapter(adapter);
+        //meal_type_dropdown.setOnItemSelectedListener(new itemSelectedListener());
+    }
+
+    public void addItemsOnHallSpinner(){
+        Spinner dining_hall_dropdown = (Spinner)findViewById(R.id.spinner_diningHall);
+        String[] items2 = new String[]{"Selleck"};
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items2);
+        dining_hall_dropdown.setAdapter(adapter2);
+    }
+
+    public void itemSelectedListener(int position){
 
         switch (position) {
             case 0:
