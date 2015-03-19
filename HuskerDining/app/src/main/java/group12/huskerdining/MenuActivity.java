@@ -31,22 +31,24 @@ public class MenuActivity extends ActionBarActivity {
 
         ConnectDB connect = new ConnectDB();
         try{
-            ArrayList<ArrayList<Object>> hallNameList = connect.execute("SELECT address FROM Hall WHERE id = 1").get();
-            TextView name = (TextView)findViewById(R.id.name_info);
-            name.setText((String)hallNameList.get(0).get(0));
+            ArrayList<ArrayList<Object>> hallNameList = connect.execute("SELECT name FROM Hall " +
+                    "JOIN Menu on hall_id = Hall.id " +
+                    "WHERE Menu.id = " + menuId).get();
+            String hallName = (String)hallNameList.get(0).get(0);
+            TextView name = (TextView)findViewById(R.id.diningHall_menu);
+            name.setText(hallName);
 
-//            ArrayList<Object> menuInfo= connect.execute("Select meal, fromTime, toTime, date from Menu where id = " + menuId).get().get(0);
-//            TextView menuInfoText = (TextView)findViewById(R.id.meal_date);
-//            Date d = new Date(Long.getLong((String)menuInfo.get(3)));
-//            menuInfoText.setText(menuInfo.get(0) + " on " + d.getMonth() + "/" + d.getDay() + "/" + d.getYear() + " going from " +
-//                menuInfo.get(1) + " to " + menuInfo.get(2));
+            ConnectDB connect2 = new ConnectDB();
+            ArrayList<Object> menuInfo= connect2.execute("Select fromTime, toTime from Menu where id = " + menuId).get().get(0);
+            TextView menuInfoText = (TextView)findViewById(R.id.meal_date);
+            menuInfoText.setText(menuInfo.get(0) + " - " + menuInfo.get(1));
 
-            ArrayList<ArrayList<Object>> menuItems = connect.execute("SELECT name, category FROM ItemOnMenu "
+            ConnectDB connect3 = new ConnectDB();
+            ArrayList<ArrayList<Object>> menuItems = connect3.execute("SELECT name, category FROM ItemOnMenu "
                     + "JOIN MenuItem on item_id = MenuItem.id "
                     + "WHERE menu_id = " + menuId).get();
 
             ArrayList<String> menuList = new ArrayList<String>();
-            System.out.println(menuItems.size());
             String currentCategory = "";
             for (ArrayList<Object> row : menuItems) {
                 if(!row.get(1).equals(currentCategory)){
