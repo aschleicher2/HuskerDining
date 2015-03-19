@@ -83,7 +83,9 @@
         android:spinnerMode="dropdown"
         android:layout_below="@+id/text_diningHall"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Spinner
         android:layout_width="wrap_content"
@@ -92,7 +94,9 @@
         android:spinnerMode="dropdown"
         android:layout_below="@+id/text_meal"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <DatePicker
         android:layout_width="wrap_content"

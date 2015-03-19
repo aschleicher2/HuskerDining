@@ -38,15 +38,18 @@ public class SelectionActivity extends ActionBarActivity {
                 Spinner spinner_type = (Spinner) findViewById(R.id.spinner_meal);
                 menu_type = spinner_type.getSelectedItem().toString();
                 DatePicker spinner_date = (DatePicker) findViewById(R.id.datePicker);
-                meal_date = spinner_date.getCalendarView().getDate();
+//                meal_date = spinner_date.getCalendarView().getDate();
 
-                Date date = new Date(meal_date);                      // timestamp now
+
+//                Date date = new Date(meal_date);                      // timestamp now
                 Calendar cal = Calendar.getInstance();       // get calendar instance
-                cal.setTime(date);                           // set cal to date
+                cal.set(spinner_date.getYear(), spinner_date.getMonth(), spinner_date.getDayOfMonth());
+//                cal.setTime(date);                           // set cal to date
                 cal.set(Calendar.HOUR, 0);                   // set hour to midnight
                 cal.set(Calendar.MINUTE, 0);                 // set minute in hour
                 cal.set(Calendar.SECOND, 0);                 // set second in minute
                 cal.set(Calendar.MILLISECOND, 0);            // set millis in second
+                cal.set(Calendar.AM_PM, Calendar.AM);
                 Date meal_date_at_midnight = cal.getTime();
 
                 Log.v("Spinner ", dining_hall);
@@ -78,19 +81,21 @@ public class SelectionActivity extends ActionBarActivity {
                     menu_id_query.append(meal_date_at_midnight.getTime());
                     menu_id_query.append(" and meal='");
                     menu_id_query.append(menu_type);
-                    menu_id_query.append("'';");
+                    menu_id_query.append("';");
 
                     Log.v("Menu query", menu_id_query.toString());
 
-                    menu_id = connect.execute(menu_id_query.toString()).get().get(0);
+                    ConnectDB connect2 = new ConnectDB();
+                    menu_id = connect2.execute(menu_id_query.toString()).get().get(0);
 
+                    Log.v("Menu id", menu_id.get(0).toString());
+                    intent.putExtra("Menu Id", ((Integer)menu_id.get(0)));
+                    startActivity(intent);
                 } catch (Exception e){
                     e.printStackTrace();
                 }
 
-                Log.v("Menu id", menu_id.get(0).toString());
-                intent.putExtra("Menu id", ((Integer)menu_id.get(0)));
-                startActivity(intent);
+
             }
         });
 
