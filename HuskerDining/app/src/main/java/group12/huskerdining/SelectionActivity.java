@@ -16,6 +16,7 @@ import android.widget.DatePicker;
 import android.widget.ArrayAdapter;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 
 public class SelectionActivity extends ActionBarActivity {
@@ -92,6 +93,8 @@ public class SelectionActivity extends ActionBarActivity {
                     intent.putExtra("Menu Id", ((Integer)menu_id.get(0)));
                     startActivity(intent);
                 } catch (Exception e){
+                    Toast noMenu = Toast.makeText(getApplicationContext(), "No menu for that day!", Toast.LENGTH_LONG);
+                    noMenu.show();
                     e.printStackTrace();
                 }
 

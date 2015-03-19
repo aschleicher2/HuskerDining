@@ -51,6 +51,7 @@ public class MenuActivity extends ActionBarActivity {
             ArrayList<String> menuList = new ArrayList<String>();
             String currentCategory = "";
             for (ArrayList<Object> row : menuItems) {
+                System.out.println(row.get(0) + " - " + row.get(1));
                 if(!row.get(1).equals(currentCategory)){
                     currentCategory = (String)row.get(1);
                     menuList.add("---" + currentCategory + "---");

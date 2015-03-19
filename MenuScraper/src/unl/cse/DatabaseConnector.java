@@ -156,6 +156,7 @@ public class DatabaseConnector {
 					if(rs.next()){
 						hallID = rs.getInt(1);
 					} else {
+						s.close();
 						return false;
 					}
 				}
@@ -198,8 +199,9 @@ public class DatabaseConnector {
 						for (MenuItem menuItem : menu.getMenuItems()) {
 							int menuItemID;
 							// Check to see if this MenuItem is already in the database
-							statement = conn.prepareStatement("SELECT id FROM MenuItem WHERE name = ?");
+							statement = conn.prepareStatement("SELECT id FROM MenuItem WHERE name = ? AND category = ?");
 							statement.setString(1, menuItem.getName());
+							statement.setString(2, menuItem.getCategory());
 							rs = statement.executeQuery();
 							
 							// If it isn't, insert it and get the id

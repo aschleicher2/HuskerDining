@@ -148,6 +148,7 @@ public class MenuScraper {
 							// Menu Item
 							// Make sure the span is actually a MenuItem
 							if(menuElement.getAttribute("class").equals("MenuItem")){
+								System.out.println(menuElement.asText());
 								MenuItem menuItem = new MenuItem(menuElement.asText(), category);
 								menu.addMenuItem(menuItem);
 							}
@@ -155,6 +156,7 @@ public class MenuScraper {
 							break;
 						case "h6":
 							// Menu Category
+							System.out.println("Category: " + menuElement.asText());
 							category = menuElement.asText();
 							break;
 						case "h4":
