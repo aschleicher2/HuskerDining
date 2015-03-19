@@ -33,31 +33,23 @@ public class InfoActivity extends ActionBarActivity {
         c.set(Calendar.MINUTE,0);
         c.set(Calendar.HOUR,0);
         c.set(Calendar.MILLISECOND, 0);
+        c.set(Calendar.AM_PM, Calendar.AM);
 
-    //00000
-        StringBuilder query = new StringBuilder("select fromTime, toTime from Menu where hall_id=");
-        query.append(1);
-        query.append(" and meal='Breakfast' and date=");
-        query.append(c.getTime().getTime());
-        query.append(";");
-
-        Log.v("Query", query.toString());
         try{
-            breakfast_return = connect.execute(query.toString()).get().get(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            ArrayList<ArrayList<Object>> mealHours = connect.execute("SELECT meal, fromTime, toTime FROM Menu WHERE date = " + c.getTimeInMillis()  +" AND hall_id = 1").get();
+            for(ArrayList<Object> meal : mealHours){
 
-        try {
-            //Log.v("Return address", (String)returnSet.get(1));
-            StringBuilder breakfast_hours = new StringBuilder((String)breakfast_return.get(0));
-            breakfast_hours.append(" to ");
-            breakfast_hours.append((String) breakfast_return.get(1));
-
-            Log.v("Hours", breakfast_hours.toString());
-            TextView breakfast = (TextView)findViewById(R.id.breakfast_hours);
-            breakfast.setText(breakfast_hours.toString());
-
+                if(meal.get(0).equals("Breakfast")){
+                    TextView breakfastHours = (TextView)findViewById(R.id.breakfast_hours);
+                    breakfastHours.setText(meal.get(1) + " - " + meal.get(2));
+                } else if (meal.get(0).equals("Lunch")){
+                    TextView lunchHours = (TextView)findViewById(R.id.lunch_hours);
+                    lunchHours.setText(meal.get(1) + " - " + meal.get(2));
+                } else if (meal.get(0).equals("Dinner")){
+                    TextView dinnerHours = (TextView)findViewById(R.id.dinner_hours);
+                    dinnerHours.setText(meal.get(1) + " - " + meal.get(2));
+                }
+            }
         } catch (Exception e) {
 
         }
