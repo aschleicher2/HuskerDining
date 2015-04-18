@@ -104,6 +104,7 @@ public class DatabaseConnector {
 					+ "id INT NOT NULL AUTO_INCREMENT,"
 					+ "name VARCHAR(45) NOT NULL,"
 					+ "category VARCHAR(45),"
+					+ "hall_id INT NOT NULL,"
 					+ "PRIMARY KEY (id))");
 			statement.executeUpdate();
 			
@@ -121,6 +122,8 @@ public class DatabaseConnector {
 			
 			// Initialize ResultSet for use in the for loops
 			ResultSet rs;
+			
+			Scanner s = new Scanner(System.in);
 			
 			// Loop through each DiningHall that is available
 			
@@ -141,7 +144,7 @@ public class DatabaseConnector {
 					statement = conn.prepareStatement("INSERT INTO Hall (name, address, phone, manager) VALUES (?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 					statement.setString(1, diningHall.getName());
 					
-					Scanner s = new Scanner(System.in);
+					
 					System.out.println("Enter address of " + diningHall.getName());
 					statement.setString(2, s.nextLine());
 					
@@ -156,7 +159,6 @@ public class DatabaseConnector {
 					if(rs.next()){
 						hallID = rs.getInt(1);
 					} else {
-						s.close();
 						return false;
 					}
 				}
@@ -199,17 +201,19 @@ public class DatabaseConnector {
 						for (MenuItem menuItem : menu.getMenuItems()) {
 							int menuItemID;
 							// Check to see if this MenuItem is already in the database
-							statement = conn.prepareStatement("SELECT id FROM MenuItem WHERE name = ? AND category = ?");
+							statement = conn.prepareStatement("SELECT id FROM MenuItem WHERE name = ? AND category = ? AND hall_id = ?");
 							statement.setString(1, menuItem.getName());
 							statement.setString(2, menuItem.getCategory());
+							statement.setInt(3, hallID);
 							rs = statement.executeQuery();
 							
 							// If it isn't, insert it and get the id
 							// If it is, just get the id
 							if(!rs.next()){
-								statement = conn.prepareStatement("INSERT INTO MenuItem (name, category) VALUES (?,?)", Statement.RETURN_GENERATED_KEYS);
+								statement = conn.prepareStatement("INSERT INTO MenuItem (name, category, hall_id) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
 								statement.setString(1, menuItem.getName());
 								statement.setString(2, menuItem.getCategory());
+								statement.setInt(3, hallID);
 								statement.executeUpdate();
 								rs = statement.getGeneratedKeys();
 								if(rs.next()){
@@ -234,6 +238,9 @@ public class DatabaseConnector {
 					count++;					
 				}
 			}
+			
+			s.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

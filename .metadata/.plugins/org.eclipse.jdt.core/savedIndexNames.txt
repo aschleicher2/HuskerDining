@@ -1,0 +1,23 @@
+INDEX VERSION 1.126+D:\Programming\Git\HuskerDining\.metadata\.plugins\org.eclipse.jdt.core
+1817876433.index
+3998698992.index
+1988720892.index
+2659402431.index
+2250510290.index
+2615305067.index
+936314119.index
+799821474.index
+355184320.index
+1834951912.index
+3404912168.index
+367418373.index
+2792925275.index
+3899983630.index
+768446742.index
+4217204754.index
+1979893065.index
+1437844774.index
+36915719.index
+2039406114.index
+904146885.index
+484539736.index
