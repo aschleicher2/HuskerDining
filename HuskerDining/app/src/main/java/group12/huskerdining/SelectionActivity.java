@@ -140,30 +140,31 @@ public class SelectionActivity extends ActionBarActivity {
 
     public void addItemsOnHallSpinner(){
         Spinner dining_hall_dropdown = (Spinner)findViewById(R.id.spinner_diningHall);
-        String[] items2 = new String[]{"Selleck"};
+
+        ConnectDB connect = new ConnectDB();
+        StringBuilder hall_query = new StringBuilder("select name from Hall;");
+        ArrayList<String> hall_names = new ArrayList<>();
+
+        ArrayList<ArrayList<Object>> temp= null;
+        try {
+            temp = connect.execute(hall_query.toString()).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        for(int i=0; i<temp.size(); i++){
+            hall_names.add(i,temp.get(i).get(0).toString());
+            Log.v("Hall name", hall_names.get(i));
+        }
+
+       String[] items2 = new String[hall_names.size()];
+        for(int i=0; i<hall_names.size(); i++){
+            items2[i] = hall_names.get(i).toString();
+        }
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items2);
         dining_hall_dropdown.setAdapter(adapter2);
     }
-
-    public void itemSelectedListener(int position){
-
-        switch (position) {
-            case 0:
-                // Breakfast
-                break;
-            case 1:
-                //Lunch
-                break;
-            case 2:
-                //Dinner
-                break;
-            default:
-                //nothing
-                break;
-
-        }
-    }
-
-
 
 }
