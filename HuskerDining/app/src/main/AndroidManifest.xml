@@ -31,10 +31,10 @@
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu" >
         </activity>
-
-
+        <activity
+            android:name=".RatingActivity"
+            android:label="@string/title_activity_rating" >
+        </activity>
     </application>
-
-
 
 </manifest>

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -62,6 +63,13 @@ public class MenuActivity extends ActionBarActivity {
             ListView listview = (ListView)findViewById(R.id.food_list);
             ArrayAdapter adapter = new ArrayAdapter(this,
                     android.R.layout.simple_list_item_1, menuList);
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(view.getContext(), RatingActivity.class);
+                        startActivity(intent);
+                }
+            });
             listview.setAdapter(adapter);
 
         } catch (Exception e) {
