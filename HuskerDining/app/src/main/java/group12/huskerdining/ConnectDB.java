@@ -29,11 +29,40 @@ public class ConnectDB extends AsyncTask<String, Void, ArrayList<ArrayList<Objec
     protected ArrayList<ArrayList<Object>> doInBackground(String... params) {
         if(params[0].toLowerCase().startsWith("select")){
             return selectQuery(params[0]);
+        } else if (params[0].toLowerCase().startsWith("insert")){
+            return update(params[0]);
         }
         return null;
     }
 
-    public static ArrayList<ArrayList<Object>> selectQuery(String query) {
+    private static ArrayList<ArrayList<Object>> update(String statement){
+        ArrayList<ArrayList<Object>> rows = new ArrayList<ArrayList<Object>>();
+        Connection conn = null;
+
+        try {
+            String dbUser="askinner";
+            String dbPass="skc94fan";
+            String dbURL="jdbc:mysql://cse.unl.edu:3306/askinner";
+            String driver = "com.mysql.jdbc.Driver";
+            Class.forName(driver).newInstance();
+            conn = DriverManager.getConnection(dbURL, dbUser, dbPass);
+            conn.prepareStatement(statement).executeUpdate();
+            conn.close();
+            return rows;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private static ArrayList<ArrayList<Object>> selectQuery(String query) {
         ArrayList<ArrayList<Object>> rows = new ArrayList<ArrayList<Object>>();
         Connection conn = null;
         ResultSet rs = null;

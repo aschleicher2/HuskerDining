@@ -17,29 +17,34 @@ public class RatingActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rating);
 
+        final int itemId = getIntent().getIntExtra("itemId",0);
+
+        updateRating(itemId);
+
         Button submitButton = (Button)findViewById(R.id.button_submit);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RatingBar yourRating = (RatingBar)findViewById(R.id.ratingBar2);
                 ConnectDB connectDB = new ConnectDB();
-                connectDB.execute("INSERT INTO Rating (item_id,number) VALUES (1, " +  yourRating.getRating() + ")");
-                finish();
+                connectDB.execute("INSERT INTO Rating (item_id,number) VALUES (" + itemId + ", " +  yourRating.getRating() + ")");
+                updateRating(itemId);
             }
         });
+    }
 
+    private void updateRating(int itemId) {
         RatingBar averageRating = (RatingBar)findViewById(R.id.ratingBar);
         ConnectDB connectDB = new ConnectDB();
         try{
-            int average = Integer.parseInt((String) connectDB.execute("SELECT avg(number) FROM Rating WHERE item_id = 1").get().get(0).get(0));
-            averageRating.setNumStars(average);
+            Double average = (Double) connectDB.execute("SELECT avg(number) FROM Rating WHERE item_id = " + itemId).get().get(0).get(0);
+            System.out.println("Average is " + average);
+            if(average != null){
+                averageRating.setRating(Float.parseFloat(average + ""));
+            }
         } catch (Exception e){
-
+            e.printStackTrace();
         }
-
-        int rating = 0;
-
-
     }
 
 

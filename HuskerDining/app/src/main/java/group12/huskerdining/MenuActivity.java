@@ -45,19 +45,23 @@ public class MenuActivity extends ActionBarActivity {
             menuInfoText.setText(menuInfo.get(0) + " - " + menuInfo.get(1));
 
             ConnectDB connect3 = new ConnectDB();
-            ArrayList<ArrayList<Object>> menuItems = connect3.execute("SELECT name, category FROM ItemOnMenu "
+            ArrayList<ArrayList<Object>> menuItems = connect3.execute("SELECT name, category, id FROM ItemOnMenu "
                     + "JOIN MenuItem on item_id = MenuItem.id "
                     + "WHERE menu_id = " + menuId).get();
 
             ArrayList<String> menuList = new ArrayList<String>();
+            final ArrayList<Integer> itemIds = new ArrayList<Integer>();
+
             String currentCategory = "";
             for (ArrayList<Object> row : menuItems) {
-                System.out.println(row.get(0) + " - " + row.get(1));
-                if(!row.get(1).equals(currentCategory)){
-                    currentCategory = (String)row.get(1);
+                String category = (String)row.get(1);
+                if(!category.equals(currentCategory)){
+                    currentCategory = category;
                     menuList.add("---" + currentCategory + "---");
+                    itemIds.add(0);
                 }
                 menuList.add((String)row.get(0));
+                itemIds.add((Integer)row.get(2));
             }
 
             ListView listview = (ListView)findViewById(R.id.food_list);
@@ -66,8 +70,12 @@ public class MenuActivity extends ActionBarActivity {
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    int itemId = itemIds.get(position);
+                    if(itemId != 0){
                         Intent intent = new Intent(view.getContext(), RatingActivity.class);
+                        intent.putExtra("itemId",itemId);
                         startActivity(intent);
+                    }
                 }
             });
             listview.setAdapter(adapter);
