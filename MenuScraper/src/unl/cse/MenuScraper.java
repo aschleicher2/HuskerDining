@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -25,7 +28,15 @@ public class MenuScraper {
 	private ArrayList<DiningHall> halls;
 	
 	public static void main(String[] args) {
-		MenuScraper ms = new MenuScraper();
+		ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+		executorService.scheduleAtFixedRate(new Runnable() {
+			
+			@Override
+			public void run() {
+				new MenuScraper();
+			}
+			
+		}, 0, 7, TimeUnit.DAYS);
 	}
 	
 	public MenuScraper() {
