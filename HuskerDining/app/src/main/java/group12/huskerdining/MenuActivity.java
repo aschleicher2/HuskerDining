@@ -35,7 +35,7 @@ public class MenuActivity extends ActionBarActivity {
             ArrayList<ArrayList<Object>> hallNameList = connect.execute("SELECT name FROM Hall " +
                     "JOIN Menu on hall_id = Hall.id " +
                     "WHERE Menu.id = " + menuId).get();
-            String hallName = (String)hallNameList.get(0).get(0);
+            final String hallName = (String)hallNameList.get(0).get(0);
             TextView name = (TextView)findViewById(R.id.diningHall_menu);
             name.setText(hallName);
 
@@ -49,7 +49,7 @@ public class MenuActivity extends ActionBarActivity {
                     + "JOIN MenuItem on item_id = MenuItem.id "
                     + "WHERE menu_id = " + menuId).get();
 
-            ArrayList<String> menuList = new ArrayList<String>();
+            final ArrayList<String> menuList = new ArrayList<String>();
             final ArrayList<Integer> itemIds = new ArrayList<Integer>();
 
             String currentCategory = "";
@@ -74,6 +74,8 @@ public class MenuActivity extends ActionBarActivity {
                     if(itemId != 0){
                         Intent intent = new Intent(view.getContext(), RatingActivity.class);
                         intent.putExtra("itemId",itemId);
+                        intent.putExtra("itemName",menuList.get(position));
+                        intent.putExtra("hallName",hallName);
                         startActivity(intent);
                     }
                 }

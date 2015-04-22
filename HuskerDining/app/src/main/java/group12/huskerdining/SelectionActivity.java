@@ -133,7 +133,7 @@ public class SelectionActivity extends ActionBarActivity {
     public void addItemsOnTypeSpinner(){
         Spinner meal_type_dropdown = (Spinner)findViewById(R.id.spinner_meal);
         String[] items = new String[]{"Breakfast", "Lunch", "Dinner"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
         meal_type_dropdown.setAdapter(adapter);
         //meal_type_dropdown.setOnItemSelectedListener(new itemSelectedListener());
     }
@@ -163,7 +163,7 @@ public class SelectionActivity extends ActionBarActivity {
         for(int i=0; i<hall_names.size(); i++){
             items2[i] = hall_names.get(i).toString();
         }
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items2);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items2);
         dining_hall_dropdown.setAdapter(adapter2);
     }
 

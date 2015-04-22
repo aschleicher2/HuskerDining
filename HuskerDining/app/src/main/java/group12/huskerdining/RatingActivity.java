@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 
 public class RatingActivity extends ActionBarActivity {
@@ -18,6 +19,14 @@ public class RatingActivity extends ActionBarActivity {
         setContentView(R.layout.activity_rating);
 
         final int itemId = getIntent().getIntExtra("itemId",0);
+        final String itemName = getIntent().getStringExtra("itemName");
+        final String hallName = getIntent().getStringExtra("hallName");
+
+        TextView itemText = (TextView)findViewById(R.id.text_item);
+        itemText.setText(itemName);
+
+        TextView hallText = (TextView)findViewById(R.id.text_hall);
+        hallText.setText(hallName);
 
         updateRating(itemId);
 
@@ -29,7 +38,6 @@ public class RatingActivity extends ActionBarActivity {
                 ConnectDB connectDB = new ConnectDB();
                 connectDB.execute("INSERT INTO Rating (item_id,number) VALUES (" + itemId + ", " +  yourRating.getRating() + ")");
                 updateRating(itemId);
-                finish();
             }
         });
     }

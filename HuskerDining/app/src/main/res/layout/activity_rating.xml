@@ -10,40 +10,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Rating"
-        android:id="@+id/text_rating"
-        android:textSize="@android:dimen/app_icon_size"
-        android:gravity="center_horizontal"
-        android:paddingBottom="10dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Item"
         android:id="@+id/text_item"
-        android:textSize="@dimen/abc_action_button_min_width_overflow_material"
+        android:textSize="30dp"
         android:gravity="center_horizontal"
-        android:paddingBottom="10dp"
-        android:layout_below="@+id/text_rating"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="41dp"
-        android:layout_alignRight="@+id/text_rating"
-        android:layout_alignEnd="@+id/text_rating" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ratingBar"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:stepSize="0.5"
-        android:isIndicator="true"/>
+        android:isIndicator="true"
+        android:layout_below="@+id/text_AverageRating"
+        android:paddingBottom="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,11 +39,11 @@
         android:textSize="@dimen/abc_action_button_min_width_overflow_material"
         android:gravity="center_horizontal"
         android:paddingBottom="10dp"
-        android:layout_above="@+id/ratingBar"
         android:layout_alignRight="@+id/text_item"
         android:layout_alignEnd="@+id/text_item"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/text_hall" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -69,20 +54,19 @@
         android:textSize="@dimen/abc_action_button_min_width_overflow_material"
         android:gravity="center_horizontal"
         android:paddingBottom="10dp"
-        android:layout_below="@+id/ratingBar"
-        android:layout_marginTop="40dp"
         android:layout_alignRight="@+id/text_AverageRating"
         android:layout_alignEnd="@+id/text_AverageRating"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ratingBar" />
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ratingBar2"
-        android:layout_below="@+id/text_YourRating"
         android:layout_centerHorizontal="true"
-        android:stepSize="0.5" />
+        android:stepSize="0.5"
+        android:layout_below="@+id/text_YourRating" />
 
     <Button
         android:layout_width="wrap_content"
@@ -92,10 +76,20 @@
         android:clickable="false"
         android:textSize="@dimen/abc_action_button_min_width_overflow_material"
         android:gravity="center_horizontal"
-        android:layout_below="@+id/ratingBar2"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Hall"
+        android:id="@+id/text_hall"
+        android:layout_below="@+id/text_item"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="20dp" />
 
 </RelativeLayout>

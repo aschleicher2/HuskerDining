@@ -106,7 +106,7 @@ public class InfoActivity extends ActionBarActivity {
 
         Spinner s = (Spinner) findViewById(R.id.spinner_name);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_dropdown_item, spinner);
+                android.R.layout.simple_list_item_1, spinner);
         s.setAdapter(adapter);
     }
     private void setHallHours(String hall_name) {

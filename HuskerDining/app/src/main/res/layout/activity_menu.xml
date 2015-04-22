@@ -25,7 +25,7 @@
         android:text="Hall name"
         android:id="@+id/diningHall_menu"
         android:gravity="center_horizontal"
-        android:textSize="@dimen/abc_action_button_min_width_overflow_material"
+        android:textSize="25dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -43,6 +43,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:textSize="20dp" />
 
 </RelativeLayout>

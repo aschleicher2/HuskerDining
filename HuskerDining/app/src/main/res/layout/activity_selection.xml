@@ -7,21 +7,6 @@
     tools:context="group12.huskerdining.SelectionActivity"
     android:id="@+id/selection_screen">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Select Menu"
-        android:id="@+id/select_menu"
-        android:textSize="@android:dimen/app_icon_size"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center_horizontal"
-        android:layout_alignParentTop="true"
-        android:paddingBottom="10dp" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,12 +40,12 @@
         android:text="Date"
         android:id="@+id/text_date"
         android:gravity="center_horizontal"
-        android:layout_below="@+id/select_menu"
-        android:layout_alignLeft="@+id/text_meal"
-        android:layout_alignStart="@+id/text_meal"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textStyle="bold" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
