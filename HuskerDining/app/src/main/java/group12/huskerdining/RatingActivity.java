@@ -29,6 +29,7 @@ public class RatingActivity extends ActionBarActivity {
                 ConnectDB connectDB = new ConnectDB();
                 connectDB.execute("INSERT INTO Rating (item_id,number) VALUES (" + itemId + ", " +  yourRating.getRating() + ")");
                 updateRating(itemId);
+                finish();
             }
         });
     }

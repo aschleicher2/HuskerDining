@@ -167,4 +167,6 @@ public class SelectionActivity extends ActionBarActivity {
         dining_hall_dropdown.setAdapter(adapter2);
     }
 
+
+
 }
