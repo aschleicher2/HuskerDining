@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class RatingActivity extends ActionBarActivity {
@@ -36,8 +37,10 @@ public class RatingActivity extends ActionBarActivity {
             public void onClick(View v) {
                 RatingBar yourRating = (RatingBar)findViewById(R.id.ratingBar2);
                 ConnectDB connectDB = new ConnectDB();
-                connectDB.execute("INSERT INTO Rating (item_id,number) VALUES (" + itemId + ", " +  yourRating.getRating() + ")");
+                connectDB.execute("INSERT INTO Rating (item_id,number) VALUES (" + itemId + ", " + yourRating.getRating() + ")");
                 updateRating(itemId);
+                yourRating.setRating(0);
+                Toast.makeText(getApplicationContext(), "Rating successful", Toast.LENGTH_SHORT).show();
             }
         });
     }
