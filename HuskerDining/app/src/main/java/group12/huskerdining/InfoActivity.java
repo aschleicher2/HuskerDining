@@ -31,7 +31,7 @@ public class InfoActivity extends ActionBarActivity {
         setContentView(R.layout.activity_info);
 
         setHallNameSpinner();
-        setHallHours();
+
 
         Spinner spinner_select = (Spinner) findViewById(R.id.spinner_name);
         spinner_select.setOnItemSelectedListener(
@@ -39,6 +39,7 @@ public class InfoActivity extends ActionBarActivity {
                 public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                     Object item = parent.getItemAtPosition(pos);
                     setHallProperties(item.toString());
+                    setHallHours(item.toString());
                 }
                 public void onNothingSelected(AdapterView<?> parent) {
                 }
@@ -108,9 +109,7 @@ public class InfoActivity extends ActionBarActivity {
                 android.R.layout.simple_spinner_dropdown_item, spinner);
         s.setAdapter(adapter);
     }
-    private void setHallHours() {
-        ConnectDB connect = new ConnectDB();
-        ArrayList<Object> breakfast_return = null;
+    private void setHallHours(String hall_name) {
 
         Calendar c = Calendar.getInstance();
         c.set(Calendar.SECOND,0);
@@ -119,24 +118,46 @@ public class InfoActivity extends ActionBarActivity {
         c.set(Calendar.MILLISECOND, 0);
         c.set(Calendar.AM_PM, Calendar.AM);
 
-        try{
-            ArrayList<ArrayList<Object>> mealHours = connect.execute("SELECT meal, fromTime, toTime FROM Menu WHERE date = " + c.getTimeInMillis()  +" AND hall_id = 1").get();
-            for(ArrayList<Object> meal : mealHours){
-
-                if(meal.get(0).equals("Breakfast")){
-                    TextView breakfastHours = (TextView)findViewById(R.id.breakfast_hours);
-                    breakfastHours.setText(meal.get(1) + " - " + meal.get(2));
-                } else if (meal.get(0).equals("Lunch")){
-                    TextView lunchHours = (TextView)findViewById(R.id.lunch_hours);
-                    lunchHours.setText(meal.get(1) + " - " + meal.get(2));
-                } else if (meal.get(0).equals("Dinner")){
-                    TextView dinnerHours = (TextView)findViewById(R.id.dinner_hours);
-                    dinnerHours.setText(meal.get(1) + " - " + meal.get(2));
-                }
-            }
+        ConnectDB connect = new ConnectDB();
+        int hall_id = 0;
+        try {
+            hall_id = (int) connect.execute("select id from Hall where name= '" + hall_name + "';").get().get(0).get(0);
+            Log.v("Hall id", String.valueOf(hall_id));
         } catch (Exception e) {
 
         }
+
+        ConnectDB connect2 = new ConnectDB();
+        ArrayList<ArrayList<Object>> mealHours = null;
+        try {
+            mealHours = connect2.execute("SELECT meal, fromTime, toTime FROM Menu WHERE date = " + c.getTimeInMillis()  +" AND hall_id = "+hall_id+";").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
+        TextView breakfastHours = (TextView)findViewById(R.id.breakfast_hours);
+        breakfastHours.setText("Closed");
+        TextView lunchHours = (TextView)findViewById(R.id.lunch_hours);
+        lunchHours.setText("Closed");
+        TextView dinnerHours = (TextView)findViewById(R.id.dinner_hours);
+        dinnerHours.setText("Closed");
+        for(int i=0; i<mealHours.size(); i++){
+                ArrayList<Object> meal = mealHours.get(i);
+                Log.v("meal type", meal.get(0).toString());
+                Log.v("from time", meal.get(1).toString());
+                Log.v("to time", meal.get(2).toString());
+
+                if(meal.get(0).equals("Breakfast")){
+                    breakfastHours.setText(meal.get(1) + " - " + meal.get(2));
+                } else if (meal.get(0).equals("Lunch")){
+                    lunchHours.setText(meal.get(1) + " - " + meal.get(2));
+                } else if (meal.get(0).equals("Dinner")){
+                    dinnerHours.setText(meal.get(1) + " - " + meal.get(2));
+                }
+            }
+
     }
 
 
