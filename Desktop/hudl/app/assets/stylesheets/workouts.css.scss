@@ -1,0 +1,52 @@
+.navbar-header {
+  background-color: rgb(251, 36, 88);
+  width: 100%;
+}
+
+.container-fluid {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-collapse {
+    margin: 0;
+}
+
+.navbar {
+  background-color: transparent;
+  border-color: transparent;
+}
+.navbar-default .navbar-text {
+    color: white;
+    font-size: 50px;
+    padding-left: 10px;
+}
+
+h4 {
+  color: rgb(23, 69, 146);
+  margin: 10px;
+}
+
+table {
+  margin: 25px;
+  border: 1px solid #D3D3D3;
+}
+
+tr, th, td {
+  text-align: center;
+}
+
+h3 {
+    text-align: left;
+
+  color: rgb(251, 36, 88);
+}
+
+h1 {
+  color: rgb(251, 36, 88);
+}
+
+.edit {
+  margin: 10px;
+}

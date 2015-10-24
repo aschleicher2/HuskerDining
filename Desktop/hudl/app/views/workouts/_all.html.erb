@@ -1,0 +1,33 @@
+<h3>List of Workouts</h3>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Body Part Targeted</th>
+      <th>Picture</th>
+      <th>Favorite</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @workouts.each do |workout| %>
+      <tr>
+        <td><%= workout.name %></td>
+        <td><%= workout.bodyPart %></td>
+        <td><img src="<%= workout.image %>"</img></td>
+
+        <% if workout.favorite == true %>
+        <td><span class="glyphicon glyphicon-star"></span> </td>
+        <td><%= link_to 'Remove from Favorites', edit_workout_path(workout) %></td> 
+        <% else %>
+        <td></td>
+        <td><%= link_to 'Add to Favorites', edit_workout_path(workout) %></td>  
+        <%end%>
+
+        
+
+      </tr>
+    <%end%>
+  </tbody>
+  </table>

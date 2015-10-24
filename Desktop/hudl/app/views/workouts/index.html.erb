@@ -1,0 +1,33 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-text">Workout</p>
+      <button type="button" class="btn btn-default navbar-btn" onclick="onAllClick()">All Workouts</button>
+      <button type="button" class="btn btn-default navbar-btn" onclick="onFavoriteClick()">Favorite</button>
+    </div>
+  </div>
+  </div>
+
+  </br>
+    <h4>Read through the list of workouts, and choose the workout that best targets the area you want to improve. </br> In additon, add workouts to your favorites to access them easily.</h4>
+
+<div class="col-md-6" id="all">
+  <%= render 'all' %>
+</div>
+
+<div class="col-md-6" id="favorite" style="display: none">
+  <%= render 'favorite' %>
+</div>
+
+
+<script type="text/javascript">
+  function onFavoriteClick() {
+    document.getElementById("favorite").style.display = "block";
+    document.getElementById("all").style.display = "none";
+  }
+
+  function onAllClick() {
+    document.getElementById("favorite").style.display = "none";
+    document.getElementById("all").style.display = "block";
+  }
+</script>

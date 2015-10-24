@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <p class="navbar-text">Workout</p>
+    </div>
+  </div>
+  </div>
+
+<div class="col-md-6">
+
+<h3>Adding to Favorites</h3>
+
+<p>
+  <strong>Name:</strong>
+  <%= @workout.name %>
+</p>
+
+<p>
+  <strong>Body Part:</strong>
+  <%= @workout.bodyPart %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <img src="<%= @workout.image %>"</img>
+</p>
+
+<p>
+  <strong>Favorite:</strong>
+  <%= @workout.favorite %>
+</p>
+
+<%= link_to 'Back', workouts_path %>
+</div>
