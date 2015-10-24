@@ -1,0 +1,207 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="group12.huskerdining.InfoActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Address"
+        android:id="@+id/address"
+        android:singleLine="false"
+        android:gravity="center_horizontal"
+        android:paddingTop="10dp"
+        android:textStyle="bold"
+        android:layout_below="@+id/spinner_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Phone Number"
+        android:id="@+id/phone_number"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:layout_below="@+id/address_info"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Manager&apos;s name"
+        android:id="@+id/manager_name"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:layout_below="@+id/phone_info"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/phone_info"
+        android:layout_alignEnd="@+id/phone_info" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="N/A"
+        android:id="@+id/address_info"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/address"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="N/A"
+        android:id="@+id/phone_info"
+        android:gravity="center_horizontal"
+        android:paddingBottom="10dp"
+        android:layout_below="@+id/phone_number"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/phone_number"
+        android:layout_alignEnd="@+id/phone_number" />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_name"
+        android:gravity="center"
+        android:text="Large Text"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="false"
+        android:layout_marginLeft="0dp"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="N/A"
+        android:id="@+id/manager_info"
+        android:gravity="center_horizontal"
+        android:paddingBottom="15dp"
+        android:layout_below="@+id/manager_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Today&apos;s Hours"
+        android:id="@+id/hours"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:singleLine="false"
+        android:paddingBottom="5dp"
+        android:layout_below="@+id/manager_info"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/manager_info"
+        android:layout_alignEnd="@+id/manager_info" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Breakfast"
+        android:id="@+id/breakfast"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/hours"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Closed"
+        android:id="@+id/breakfast_hours"
+        android:gravity="center_horizontal"
+        android:paddingBottom="5dp"
+        android:layout_below="@+id/breakfast"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Lunch"
+        android:id="@+id/lunch"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/breakfast_hours"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/breakfast_hours"
+        android:layout_alignEnd="@+id/breakfast_hours" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Closed"
+        android:id="@+id/lunch_hours"
+        android:gravity="center_horizontal"
+        android:paddingBottom="5dp"
+        android:layout_below="@+id/lunch"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Dinner"
+        android:id="@+id/dinner"
+        android:textStyle="bold"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/lunch_hours"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Closed"
+        android:id="@+id/dinner_hours"
+        android:gravity="center_horizontal"
+        android:layout_below="@+id/dinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
